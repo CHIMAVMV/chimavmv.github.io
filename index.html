@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chima Gideon Nweke | Software Engineer, Data Analyst & Financial Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #3b82f6;
+            --accent-2: #8b5cf6;
+            --surface: #1e293b;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+        
+        .serif {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+        
+        .skill-bar {
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+            pointer-events: none;
+            background-image: 
+                radial-gradient(circle at 20% 50%, #3b82f6 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, #8b5cf6 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, #06b6d4 0%, transparent 50%);
+        }
+        
+        .grid-pattern {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+        }
+        
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .project-overlay {
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, transparent 100%);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .pulse-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(59, 130, 246, 0.5);
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0; }
+        }
+
+        .education-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .education-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+        }
+
+        .status-badge {
+            animation: pulse-badge 2s infinite;
+        }
+
+        @keyframes pulse-badge {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Background Effects -->
+    <div class="parallax-bg"></div>
+    <div class="fixed inset-0 grid-pattern pointer-events-none z-0"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass border-b border-white/10 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold tracking-tighter">
+                    <span class="gradient-text">CGN</span>
+                    <span class="text-white/80 text-sm ml-2 font-normal">Software, Data & Finance</span>
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition">Home</a>
+                    <a href="#about" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition">About</a>
+                    <a href="#education" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition">Education</a>
+                    <a href="#projects" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition">Projects</a>
+                    <a href="#contact" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition">Contact</a>
+                </div>
+                
+                <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass border-t border-white/10">
+            <div class="px-6 py-4 space-y-4">
+                <a href="#home" class="block text-gray-300 hover:text-white">Home</a>
+                <a href="#about" class="block text-gray-300 hover:text-white">About</a>
+                <a href="#education" class="block text-gray-300 hover:text-white">Education</a>
+                <a href="#projects" class="block text-gray-300 hover:text-white">Projects</a>
+                <a href="#contact" class="block text-gray-300 hover:text-white">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-cent er pt-20 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="space-y-6">
+                <div class="inline-flex items-center space-x-2 glass px-4 py-2 rounded-full text-sm text-blue-400">
+                    <span class="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></span>
+                    <span>MSc. Financial Engineering (in progress)</span>
+                </div>
+                
+                <h1 class="serif text-5xl md:text-7xl font-bold leading-tight">
+                    Chima Gideon
+                    <span class="block gradient-text typing-cursor" id="typing-text">Nweke</span>
+                </h1>
+                
+                <p class="text-lg text-gray-400 max-w-lg leading-relaxed">
+                    Software Engineer, Data Analyst & Financial Engineer specializing in quantitative analysis, 
+                    volatility modeling, and predictive analytics. Bridging the gap between 
+                    complex financial data and actionable investment strategies.
+                </p>
+                
+                <div class="flex flex-wrap gap-4 pt-4">
+                    <a href="#projects" class="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg font-semibold overflow-hidden">
+                        <span class="relative z-10">View Projects</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                    <a href="https://github.com/chimavmv" target="_blank" class="px-8 py-4 glass rounded-lg font-semibold hover:bg-white/10 transition border border-white/20 flex items-center gap-2">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </div>
+                
+                <div class="flex items-center space-x-6 pt-8 text-gray-400">
+                    <a href="https://github.com/chimavmv" class="hover:text-white transition transform hover:scale-110"><i class="fab fa-github text-2xl"></i></a>
+                    <a href="https://linkedin.com/in/chima-gideon-nweke-52450b118" class="hover:text-blue-400 transition transform hover:scale-110"><i class="fab fa-linkedin text-2xl"></i></a>
+                    <a href="#" class="hover:text-blue-400 transition transform hover:scale-110"><i class="fab fa-twitter text-2xl"></i></a>
+                    <a href="mailto:nweke_chima@yahoo.com.com" class="hover:text-white transition transform hover:scale-110"><i class="fas fa-envelope text-2xl"></i></a>
+                </div>
+            </div>
+            
+            <div class="relative">
+                <div class="relative w-full aspect-square max-w-md mx-auto">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500/30 to-purple-500/30 rounded-3xl transform rotate-6"></div>
+                    <div class="absolute inset-0 bg-gradient-to-br from-purple-500/30 to-blue-500/30 rounded-3xl transform -rotate-6"></div>
+                    <div class="relative glass rounded-3xl p-8 h-full flex flex-col justify-center items-center text-center">
+                        <div class="w-32 h-32 rounded-full bg-gradient-to-br from-blue-400 via-purple-500 to-blue-600 mb-6 flex items-center justify-center text-4xl font-bold border-4 border-white/10">
+                            CGN
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Chima Gideon Nweke</h3>
+                        <p class="text-gray-400 mb-6">Software Engineer, Data Scientist/Analyst & Financial Engineer</p>
+                        
+                        <div class="grid grid-cols-2 gap-4 w-full">
+                            <div class="glass p-4 rounded-xl">
+                                <div class="text-2xl font-bold gradient-text">4+</div>
+                                <div class="text-sm text-gray-400">Years Exp.</div>
+                            </div>
+                            <div class="glass p-4 rounded-xl">
+                                <div class="text-2xl font-bold gradient-text">2</div>
+                                <div class="text-sm text-gray-400">Degrees</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="space-y-6">
+                    <h2 class="serif text-4xl md:text-5xl font-bold">About Me</h2>
+                    <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500"></div>
+                    
+                    <p class="text-gray-400 text-lg leading-relaxed">
+                        I'm a quantitative analyst with a strong foundation in Mathematics from the University of Lagos 
+                        and advanced training in Data Science and Financial Engineering from WorldQuant University. 
+                        My unique blend of mathematical rigor, software engineering capabilities from ALX Africa, and 
+                        financial expertise allows me to tackle complex data challenges in investment and risk management.
+                    </p>
+                    
+                    <p class="text-gray-400 leading-relaxed">
+                        Currently pursuing my MSc in Financial Engineering while applying machine learning techniques 
+                        to financial markets, including volatility modeling and asset price prediction. I'm passionate 
+                        about leveraging data to optimize portfolio performance and manage financial risk.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6 pt-6">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Quantitative Analysis</h4>
+                                <p class="text-sm text-gray-400">Statistical modeling & forecasting</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Software Engineering</h4>
+                                <p class="text-sm text-gray-400">ALX Africa Certified</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-4 mt-8">
+                        <div class="glass p-6 rounded-2xl card-hover">
+                            <i class="fas fa-chart-area text-3xl text-blue-400 mb-3"></i>
+                            <h3 class="font-bold mb-1">Financial Modeling</h3>
+                            <p class="text-sm text-gray-400">Volatility & risk analysis</p>
+                        </div>
+                        <div class="glass p-6 rounded-2xl card-hover">
+                            <i class="fas fa-brain text-3xl text-purple-400 mb-3"></i>
+                            <h3 class="font-bold mb-1">Machine Learning</h3>
+                            <p class="text-sm text-gray-400">Predictive analytics</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="glass p-6 rounded-2xl card-hover">
+                            <i class="fas fa-database text-3xl text-cyan-400 mb-3"></i>
+                            <h3 class="font-bold mb-1">Data Engineering</h3>
+                            <p class="text-sm text-gray-400">ETL & pipelines</p>
+                        </div>
+                        <div class="glass p-6 rounded-2xl card-hover">
+                            <i class="fas fa-shield-alt text-3xl text-pink-400 mb-3"></i>
+                            <h3 class="font-bold mb-1">Risk Management</h3>
+                            <p class="text-sm text-gray-400">Portfolio optimization</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="serif text-4xl md:text-5xl font-bold mb-4">Education & Qualifications</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Strong academic foundation in quantitative disciplines with specialized training in modern data technologies.</p>
+            </div>
+
+            <div class="space-y-6 max-w-4xl mx-auto">
+                <!-- MSc Financial Engineering -->
+                <div class="education-card glass rounded-2xl p-8 card-hover relative">
+                    <div class="absolute top-4 right-4">
+                        <span class="status-badge px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs font-semibold border border-green-500/30">
+                            <i class="fas fa-spinner fa-spin mr-1"></i> In Progress
+                        </span>
+                    </div>
+                    <div class="flex items-start gap-6">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-graduation-cap text-2xl text-white"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold mb-1">MSc. Financial Engineering</h3>
+                            <p class="text-blue-400 font-medium mb-2">WorldQuant University</p>
+                            <p class="text-gray-400 text-sm mb-3">Advanced quantitative methods for financial markets, derivatives pricing, risk management, and algorithmic trading strategies.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Quantitative Finance</span>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Risk Modeling</span>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Derivatives</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BSc Applied Data Science -->
+                <div class="education-card glass rounded-2xl p-8 card-hover relative">
+                    <div class="absolute top-4 right-4">
+                        <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-xs font-semibold border border-blue-500/30">
+                            <i class="fas fa-check-circle mr-1"></i> Feb 2026
+                        </span>
+                    </div>
+                    <div class="flex items-start gap-6">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-database text-2xl text-white"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold mb-1">BSc. Applied Data Science</h3>
+                            <p class="text-purple-400 font-medium mb-2">WorldQuant University</p>
+                            <p class="text-gray-400 text-sm mb-3">Comprehensive data science curriculum covering machine learning, statistical analysis, data visualization, and big data technologies.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Machine Learning</span>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Statistical Analysis</span>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Python/R</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BSc Mathematics -->
+                <div class="education-card glass rounded-2xl p-8 card-hover relative">
+                    <div class="absolute top-4 right-4">
+                        <span class="px-3 py-1 bg-gray-500/20 text-gray-400 rounded-full text-xs font-semibold border border-gray-500/30">
+                            <i class="fas fa-check-circle mr-1"></i> 2019
+                        </span>
+                    </div>
+                    <div class="flex items-start gap-6">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-square-root-alt text-2xl text-white"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold mb-1">BSc. Mathematics</h3>
+                            <p class="text-orange-400 font-medium mb-2">University of Lagos</p>
+                            <p class="text-gray-400 text-sm mb-3">Strong foundation in pure and applied mathematics, numerical analysis, probability theory, and mathematical modeling.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Calculus</span>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Linear Algebra</span>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Probability</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Software Engineering -->
+                <div class="education-card glass rounded-2xl p-8 card-hover relative">
+                    <div class="absolute top-4 right-4">
+                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-xs font-semibold border border-cyan-500/30">
+                            <i class="fas fa-check-circle mr-1"></i> 2025
+                        </span>
+                    </div>
+                    <div class="flex items-start gap-6">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-laptop-code text-2xl text-white"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold mb-1">Software Engineering</h3>
+                            <p class="text-cyan-400 font-medium mb-2">ALX Africa</p>
+                            <p class="text-gray-400 text-sm mb-3">Intensive full-stack software engineering program covering low-level programming, algorithms, system design, and DevOps.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">C/Python</span>
+				<span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Next.js</span>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">System Design</span>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">DevOps</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="serif text-4xl md:text-5xl font-bold mb-4">Technical Skills</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Quantitative toolkit combining financial engineering, data science, and software development.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Programming -->
+                <div class="glass rounded-2xl p-8 card-hover">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-bold flex items-center gap-3">
+                            <i class="fas fa-code text-blue-400"></i>
+                            Programming
+                        </h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm">Python (Pandas, NumPy)</span>
+                                <span class="text-sm text-blue-400">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full" style="width: 0%" data-width="95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm">R (Quantitative)</span>
+                                <span class="text-sm text-blue-400">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full" style="width: 0%" data-width="85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm">SQL</span>
+                                <span class="text-sm text-blue-400">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full" style="width: 0%" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm">C Programming</span>
+                                <span class="text-sm text-blue-400">75%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full" style="width: 0%" data-width="75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financial Engineering -->
+                <div class="glass rounded-2xl p-8 card-hover">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-bold flex items-center gap-3">
+                            <i class="fas fa-chart-line text-purple-400"></i>
+                            Financial Eng.
+                        </h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm">Volatility Modeling</span>
+                                <span class="text-sm text-purple-400">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full" style="width: 0%" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm">Time Series Analysis</span>
+                                <span class="text-sm text-purple-400">88%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full" style="width: 0%" data-width="88%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm">Risk Management</span>
+                                <span class="text-sm text-purple-400">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full" style="width: 0%" data-width="85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm">Derivatives Pricing</span>
+                                <span class="text-sm text-purple-400">80%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full" style="width: 0%" data-width="80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Science -->
+                <div class="glass rounded-2xl p-8 card-hover">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-bold flex items-center gap-3">
+                            <i class="fas fa-brain text-cyan-400"></i>
+                            Data Science
+                        </h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm">Machine Learning</span>
+                                <span class="text-sm text-cyan-400">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-cyan-500 to-blue-500 h-2 rounded-full" style="width: 0%" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm">Statistical Modeling</span>
+                                <span class="text-sm text-cyan-400">92%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-cyan-500 to-blue-500 h-2 rounded-full" style="width: 0%" data-width="92%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm">Predictive Analytics</span>
+                                <span class="text-sm text-cyan-400">88%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-cyan-500 to-blue-500 h-2 rounded-full" style="width: 0%" data-width="88%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm">Data Visualization</span>
+                                <span class="text-sm text-cyan-400">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-cyan-500 to-blue-500 h-2 rounded-full" style="width: 0%" data-width="85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tools -->
+            <div class="mt-12 glass rounded-2xl p-8">
+                <h3 class="text-xl font-bold mb-6 text-center">Tools & Technologies</h3>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <span class="px-6 py-3 glass rounded-full text-sm font-medium hover:bg-white/10 transition cursor-default">
+                        <i class="fab fa-python mr-2 text-yellow-400"></i>Python
+                    </span>
+                    <span class="px-6 py-3 glass rounded-full text-sm font-medium hover:bg-white/10 transition cursor-default">
+                        <i class="fas fa-database mr-2 text-orange-400"></i>PostgreSQL
+                    </span>
+                    <span class="px-6 py-3 glass rounded-full text-sm font-medium hover:bg-white/10 transition cursor-default">
+                        <i class="fas fa-chart-bar mr-2 text-blue-400"></i>Tableau
+                    </span>
+                    <span class="px-6 py-3 glass rounded-full text-sm font-medium hover:bg-white/10 transition cursor-default">
+                        <i class="fas fa-calculator mr-2 text-gray-400"></i>MATLAB
+                    </span>
+                    <span class="px-6 py-3 glass rounded-full text-sm font-medium hover:bg-white/10 transition cursor-default">
+                        <i class="fab fa-git-alt mr-2 text-orange-600"></i>Git
+                    </span>
+                    <span class="px-6 py-3 glass rounded-full text-sm font-medium hover:bg-white/10 transition cursor-default">
+                        <i class="fab fa-docker mr-2 text-blue-600"></i>Docker
+                    </span>
+                    <span class="px-6 py-3 glass rounded-full text-sm font-medium hover:bg-white/10 transition cursor-default">
+                        <i class="fas fa-cloud mr-2 text-yellow-500"></i>AWS
+                    </span>
+                    <span class="px-6 py-3 glass rounded-full text-sm font-medium hover:bg-white/10 transition cursor-default">
+                        <i class="fas fa-brain mr-2 text-red-400"></i>TensorFlow
+                    </span>
+                    <span class="px-6 py-3 glass rounded-full text-sm font-medium hover:bg-white/10 transition cursor-default">
+                        <i class="fas fa-table mr-2 text-green-400"></i>Excel/VBA
+                    </span>
+                    <span class="px-6 py-3 glass rounded-full text-sm font-medium hover:bg-white/10 transition cursor-default">
+                        <i class="fas fa-chart-line mr-2 text-purple-400"></i>Bloomberg
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="serif text-4xl md:text-5xl font-bold mb-4">Featured Projects</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Quantitative analysis projects showcasing financial engineering and predictive modeling expertise.</p>
+            </div>
+
+            <!-- Project 1: Stock Market Volatility -->
+            <div class="glass rounded-3xl overflow-hidden mb-12 card-hover">
+                <div class="grid lg:grid-cols-2">
+                    <div class="p-8 lg:p-12 flex flex-col justify-center">
+                        <div class="inline-flex items-center space-x-2 mb-4">
+                            <span class="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-xs font-semibold">Financial Engineering</span>
+                            <span class="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-xs font-semibold">Volatility</span>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-4">Stock Market Volatility in South Africa</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed">
+                            Comprehensive volatility analysis of the Johannesburg Stock Exchange (JSE) using GARCH models 
+                            and realized volatility measures. Examined the impact of macroeconomic events on market volatility 
+                            clustering and asymmetric volatility patterns.
+                        </p>
+                        <ul class="space-y-2 mb-8 text-gray-400">
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-400 text-sm"></i> GARCH(1,1) and EGARCH volatility modeling</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-400 text-sm"></i> Analyzed JSE All Share Index (ALSI) 10-year historical data</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-400 text-sm"></i> Identified volatility spillover effects from global markets</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-400 text-sm"></i> Risk metrics: VaR and CVaR calculations</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">Python</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">ARCH Library</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">Pandas</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">Matplotlib</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <button onclick="toggleChart('chart1')" class="px-6 py-3 bg-orange-600 hover:bg-orange-700 rounded-lg font-medium transition">
+                                <i class="fas fa-chart-area mr-2"></i>View Analysis
+                            </button>
+                            <a href="https://github.com/chimavmv" target="_blank" class="px-6 py-3 glass rounded-lg font-medium hover:bg-white/10 transition border border-white/20 flex items-center gap-2">
+                                <i class="fab fa-github"></i>View Code
+                            </a>
+                        </div>
+                    </div>
+                    <div class="relative bg-gradient-to-br from-orange-900/50 to-red-900/50 p-8">
+                        <div id="chart1-container" class="chart-container">
+                            <canvas id="chart1"></canvas>
+                        </div>
+                        <div class="absolute bottom-4 right-4 flex gap-2">
+                            <div class="glass px-3 py-1 rounded text-xs">
+                                <span class="text-orange-400">●</span> Returns
+                            </div>
+                            <div class="glass px-3 py-1 rounded text-xs">
+                                <span class="text-red-400">●</span> Volatility
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2: House Price Prediction -->
+            <div class="glass rounded-3xl overflow-hidden card-hover">
+                <div class="grid lg:grid-cols-2">
+                    <div class="relative bg-gradient-to-br from-green-900/50 to-blue-900/50 p-8 order-2 lg:order-1">
+                        <div id="chart2-container" class="chart-container">
+                            <canvas id="chart2"></canvas>
+                        </div>
+                    </div>
+                    <div class="p-8 lg:p-12 flex flex-col justify-center order-1 lg:order-2">
+                        <div class="inline-flex items-center space-x-2 mb-4">
+                            <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs font-semibold">Machine Learning</span>
+                            <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-xs font-semibold">Regression</span>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-4">Price Prediction for Houses in Mexico</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed">
+                            End-to-end machine learning pipeline predicting residential property prices across major Mexican 
+                            cities. Implemented feature engineering for location-based amenities and macroeconomic indicators, 
+                            achieving high prediction accuracy using ensemble methods.
+                        </p>
+                        <ul class="space-y-2 mb-8 text-gray-400">
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-400 text-sm"></i> XGBoost and Random Forest regression models</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-400 text-sm"></i> Geospatial feature engineering (proximity to amenities)</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-400 text-sm"></i> R² Score: 0.89 on test set</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-400 text-sm"></i> Interactive price map visualization</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">Python</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">Scikit-learn</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">XGBoost</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">GeoPandas</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <button onclick="toggleChart('chart2')" class="px-6 py-3 bg-green-600 hover:bg-green-700 rounded-lg font-medium transition">
+                                <i class="fas fa-home mr-2"></i>View Model
+                            </button>
+                            <a href="https://github.com/chimavmv" target="_blank" class="px-6 py-3 glass rounded-lg font-medium hover:bg-white/10 transition border border-white/20 flex items-center gap-2">
+                                <i class="fab fa-github"></i>View Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 relative">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="glass rounded-3xl p-8 md:p-12">
+                <div class="text-center mb-12">
+                    <h2 class="serif text-4xl font-bold mb-4">Let's Connect</h2>
+                    <p class="text-gray-400">Open to opportunities in quantitative analysis, financial engineering, and data science roles.</p>
+                </div>
+                
+                <form class="space-y-6" onsubmit="handleSubmit(event)">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2 text-gray-300">Name</label>
+                            <input type="text" class="w-full px-4 py-3 bg-slate-800/50 border border-white/10 rounded-lg focus:outline-none focus:border-blue-500 transition text-white" placeholder="Your Name" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2 text-gray-300">Email</label>
+                            <input type="email" class="w-full px-4 py-3 bg-slate-800/50 border border-white/10 rounded-lg focus:outline-none focus:border-blue-500 transition text-white" placeholder="your@email.com" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-gray-300">Subject</label>
+                        <select class="w-full px-4 py-3 bg-slate-800/50 border border-white/10 rounded-lg focus:outline-none focus:border-blue-500 transition text-white">
+                            <option>Job Opportunity</option>
+                            <option>Project Collaboration</option>
+                            <option>Consulting</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-gray-300">Message</label>
+                        <textarea rows="5" class="w-full px-4 py-3 bg-slate-800/50 border border-white/10 rounded-lg focus:outline-none focus:border-blue-500 transition text-white resize-none" placeholder="Your message..." required></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg font-semibold text-lg hover:opacity-90 transition transform hover:scale-[1.02]">
+                        Send Message <i class="fas fa-paper-plane ml-2"></i>
+                    </button>
+                </form>
+                
+                <div class="mt-12 pt-8 border-t border-white/10 flex flex-wrap justify-center gap-8">
+                    <a href="mailto:nweke_chima@yahoo.com" class="flex items-center gap-3 text-gray-400 hover:text-white transition">
+                        <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+                            <i class="fas fa-envelope text-blue-400"></i>
+                        </div>
+                        <span>nweke_chima@yahoo.com</span>
+                    </a>
+                    <a href="https://github.com/chimavmv" target="_blank" class="flex items-center gap-3 text-gray-400 hover:text-white transition">
+                        <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+                            <i class="fab fa-github text-purple-400"></i>
+                        </div>
+                        <span>github.com/chimavmv</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/chima-gideon-nweke-52450b118" class="flex items-center gap-3 text-gray-400 hover:text-blue-400 transition">
+                        <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+                            <i class="fab fa-linkedin text-blue-400"></i>
+                        </div>
+                        <span>https://www.linkedin.com/in/chima-gideon-nweke-52450b118</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-gray-500 text-sm border-t border-white/10">
+        <p>&copy; 2026 Chima Gideon Nweke. All rights reserved. Built with precision & data.</p>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Typing Effect
+        const texts = ['Nweke', 'Financial Engineer', 'Data Analyst', 'Quantitative Researcher'];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingElement = document.getElementById('typing-text');
+
+        function typeEffect() {
+            const currentText = texts[textIndex];
+            
+            if (isDeleting) {
+                typingElement.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && charIndex === currentText.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(typeEffect, typeSpeed);
+        }
+
+        // Skill Bars Animation
+        function animateSkillBars() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const bars = entry.target.querySelectorAll('.skill-bar');
+                        bars.forEach(bar => {
+                            const width = bar.getAttribute('data-width');
+                            setTimeout(() => {
+                                bar.style.width = width;
+                            }, 200);
+                        });
+                    }
+                });
+            });
+
+            document.querySelectorAll('#skills').forEach((section) => {
+                observer.observe(section);
+            });
+        }
+
+        // Chart.js Configurations
+        let charts = {};
+
+        function initCharts() {
+            // Chart 1: Volatility Analysis
+            const ctx1 = document.getElementById('chart1').getContext('2d');
+            charts.chart1 = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+                    datasets: [{
+                        label: 'JSE Returns (%)',
+                        data: [2.5, -3.2, 8.5, -12.3, 15.2, -8.7, 22.4, -5.2, 11.8, 8.5],
+                        borderColor: '#f97316',
+                        backgroundColor: 'rgba(249, 115, 22, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        yAxisID: 'y'
+                    }, {
+                        label: 'Volatility (%)',
+                        data: [15, 18, 14, 22, 16, 35, 18, 24, 17, 15],
+                        borderColor: '#ef4444',
+                        borderDash: [5, 5],
+                        tension: 0.4,
+                        fill: false,
+                        yAxisID: 'y1'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: { 
+                            labels: { color: '#9ca3af' }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            ticks: { color: '#9ca3af' },
+                            title: { display: true, text: 'Returns %', color: '#9ca3af' }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            grid: { drawOnChartArea: false },
+                            ticks: { color: '#9ca3af' },
+                            title: { display: true, text: 'Volatility %', color: '#9ca3af' }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: '#9ca3af' }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: House Price Prediction
+            const ctx2 = document.getElementById('chart2').getContext('2d');
+            charts.chart2 = new Chart(ctx2, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Predicted vs Actual',
+                        data: Array.from({length: 50}, (_, i) => ({
+                            x: 500000 + Math.random() * 2000000,
+                            y: 500000 + Math.random() * 2000000 + (Math.random() - 0.5) * 300000
+                        })),
+                        backgroundColor: 'rgba(34, 197, 94, 0.6)',
+                        borderColor: '#22c55e',
+                    }, {
+                        label: 'Perfect Prediction',
+                        data: [{x: 400000, y: 400000}, {x: 2500000, y: 2500000}],
+                        type: 'line',
+                        borderColor: '#3b82f6',
+                        borderDash: [5, 5],
+                        pointRadius: 0,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { 
+                            labels: { color: '#9ca3af' }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Actual Price (MXN)', color: '#9ca3af' },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            ticks: { color: '#9ca3af' }
+                        },
+                        y: {
+                            title: { display: true, text: 'Predicted Price (MXN)', color: '#9ca3af' },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            ticks: { color: '#9ca3af' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function toggleChart(chartId) {
+            const chart = charts[chartId];
+            if (chart) {
+                chart.reset();
+                chart.update();
+            }
+        }
+
+        // Form Handler
+        function handleSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-check mr-2"></i>Message Sent!';
+                btn.classList.remove('from-blue-600', 'to-purple-600');
+                btn.classList.add('bg-green-600');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                    btn.classList.add('from-blue-600', 'to-purple-600');
+                    btn.classList.remove('bg-green-600');
+                    e.target.reset();
+                }, 2000);
+            }, 1500);
+        }
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+                navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+            } else {
+                navbar.classList.remove('shadow-lg');
+                navbar.style.background = 'rgba(30, 41, 59, 0.7)';
+            }
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            typeEffect();
+            animateSkillBars();
+            initCharts();
+        });
+    </script>
+</body>
+</html>
